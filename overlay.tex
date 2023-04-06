@@ -1,0 +1,13 @@
+\startuseMPgraphic{frame}
+    w := \overlaywidth;
+    h := \overlayheight;
+    p := h - 0.3cm;
+
+    pickup pencircle scaled 2;
+    draw (0,0)--(0,h) withcolor \MPcolor{mid};
+    draw (w,h) withcolor white;
+    pickup pencircle scaled 6;
+    draw (0,p) withcolor \MPcolor{mid};
+    pickup pencircle scaled 3;
+    draw (0,p) withcolor white;
+\stopuseMPgraphic

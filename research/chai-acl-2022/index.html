@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>CHAI - Chatbot AI</title>
+  </head>
+  <link rel="stylesheet" href="research.css">
+  <script src="https://unpkg.com/vue@3"></script>
+  <body>
+    <header>
+      <div>CHAI - Chatbot AI</div>
+      <a href="https://arxiv.org/abs/2204.08426">arXiv</a>
+      <a href="https://github.com/siddharthverma314/chai-naacl-2022">GitHub</a>
+    </header>
+    <div class="contents">
+      <div class="title">CHAI: A CHatbot AI for Task-Oriented Dialogue with Offline Reinforcement Learning</div>
+
+      <div class="flex-center" id="authors">
+        <div v-for="author in authors">
+          <div class="center"><a :href="author.website">{{author.name}}</a></div>
+          <div class="center">{{author.affiliation}}</div>
+        </div>
+      </div>
+
+      <div class="center">
+        <a href="https://arxiv.org/abs/2204.08426"><img class="icon" src="pdf.png" alt="arXiv"></img></a>
+        <a href="https://github.com/siddharthverma314/chai-naacl-2022"><img class="icon" src="github.png" alt="arXiv"></img></a>
+      </div>
+
+      <section>Can we use Offline Reinforcement Learning (RL) to build goal-oriented chatbots?</section>
+      <p>Conventionally, natural language generation for dialogue agents may be viewed as a statistical learning problem: determine the patterns in text and generate similar responses. However, dialogue can also be a goal directed process where speakers attempt to accomplish a specific task. Reinforcement learning (RL) algorithms are specifically designed for solving such goal-directed problems. However, naively applying RL to NLP problems requires samples collected online through human interaction, an expensive process. In this paper, we explore how we can we use Offline RL to train dialogue agents solely using static datasets.</p>
+
+      <section>Why should I use RL to create Dialogue Agents?</section>
+      <p>Traditionally, dialogue agents are trained using Supervised Learning (SL) over data collected by a human. We list two main reasons to use RL over SL in training dialogue agents.</p>
+
+      <ol>
+        <li>SL does not guarantee that the agent learns to complete the task, while <b>RL explicitly optimizes for the goal</b>.</li>
+        <li>Through training, <b>RL can produce better behavior than the dataset policy</b>. This is useful especially if the dataset collected is suboptimal.</li>
+      </ol>
+
+      <section>Okay, but why Offline RL?</section>
+      <p>There are two main reasons we use Offline RL.</p>
+
+      <ol>
+        <li>Naively applying RL to train a dialogue agent requires dialogue to be generated online, either through self-play or through human-in-the-loop. <b>Offline RL can use static data</b>, removing the requirement of online training. Consequently, we can leverage the power of large datasets to train our agent.</li>
+        <li>Training a language model using RL might result in the LM generating non-intelligible language to distribution shift. Previous work solves this by applying strong priors to the LM during finetuning. However, <b>Offline RL implicitly handles distribution shift</b>, removing the need for restrictive priors.</li>
+      </ol>
+
+      <section>I'm convinced. So what dataset did you use?</section>
+      <p>We choose the <a href="https://arxiv.org/abs/1808.09637">Craigslist Negotiation Dataset</a>, which consists of bargaining dialogue over items scraped from Craigslist. The aim of the agent is to answer questions about the item and bargain with the buyer to sell the product. The seller is rewarded proportional to the final sale price. If the seller is unable to sell the product, they are penalized.</p>
+
+      <section>And what is your model architecture?</section>
+      <p>Our model consists of three phases:</p>
+      <ol>
+        <li><b>Template Generation:</b> We employ GPT-2 to generate candidate responses to an utterance. We finetune GPT-2 on the task-specific dataset conditioned on the context and all utterances.</li>
+        <li><b>Ranking:</b> We create a matrix of templates and price candidates. We then use a Q-function to generate scores for each candidate response</li>
+        <li><b>Selection:</b> From the template matrix, we select the utterance and price tuple with the highest score.</li>
+      </ol>
+
+      <p>The model architecture is summarized in the diagram below.</p>
+
+      <div class="image">
+        <img id="method" src="method.png"></img>
+      </div>
+
+      <p>We train each component individually as follows:</p>
+      <ol>
+        <li><b>GPT-2:</b> We mask prices on the masked dataset with a special <em>$PRICE</em> token and use it to finetune GPT-2.</li>
+        <li><b>Q-function:</b> We train the Q-function using Offline RL. We experiment with <a href="https://arxiv.org/abs/2007.11091">EMaQ</a>, <a href="https://arxiv.org/abs/1911.11361">BRAC</a> and <a href="https://arxiv.org/abs/2006.04779">CQL</a>.</li>
+      </ol>
+
+
+      <section>Neat! Show me some results.</section>
+      <p>Here you are! These are a set of examples of our agent talking to human evaluators. Press the buttons on the bottom to scroll through the results.</p>
+
+      <div id="app">
+        <div v-if="loaded">
+          <div class="example-container">
+            <div class="example-scenario">
+              <h1>{{examples[index].title}}</h1>
+              <p><b>Description</b>: {{examples[index].description}}</p>
+              <p><b>List Price</b>: ${{examples[index].price}}</p>
+            </div>
+            <div class="example-chatbox">
+              <div v-for="ex in examples[index].messages"
+                   :class="['message', ex.agent == 'seller' ? 'left' : 'right']">
+                <img v-if="ex.agent == 'seller'" src="chai_2.png">
+                <div :class="ex.agent" class="para">{{ex.utterance}}</div>
+              </div>
+            </div>
+          </div>
+          <div class="button-container">
+            <button @click="dec">&lt;</button>
+            <button @click="inc">&gt;</button>
+          </div>
+        </div>
+        <div v-else>Loading...</div>
+      </div>
+
+      <section>That's cool! How do I cite your work?</section>
+
+      <p>Thanks for your interest! You can cite this work through the following BibTeX entry:</p>
+
+      <div class="citation">@inproceedings{chai2022,
+    title={CHAI: A CHatbot AI for Task-Oriented Dialogue with Offline Reinforcement Learning},
+    author={Verma, Siddharth and Fu, Justin and Yang, Mengjiao and Levine, Sergey},
+    booktitle={Proceedings of the 2022 Conference of the North American Chapter of the Association for Computational Linguistics (NAACL)},
+    year={2022},
+}</div>
+
+    </div>
+  </body>
+
+  <script>
+    function shuffleArray(array) {
+        for (let i = array.length - 1; i > 0; i--) {
+            const j = Math.floor(Math.random() * (i + 1));
+            [array[i], array[j]] = [array[j], array[i]];
+        }
+    }
+
+    const app = {
+        data() {
+            return {"loaded": false, "index": 0, "examples": []}
+        },
+        methods: {
+            async init() {
+                response = await fetch("./results.json");
+                this.examples = await response.json();
+                shuffleArray(this.examples);
+                this.loaded = true;
+            },
+            inc() {
+                this.index += 1;
+                this.index %= this.examples.length; 
+            },
+            dec() {
+                this.index += this.examples.length;
+                this.index -= 1;
+                this.index %= this.examples.length; 
+            }
+        },
+        mounted() {
+            this.init();
+        }
+    }
+    Vue.createApp(app).mount("#app");
+
+    const app2 = {
+        data() {
+            return {
+                "authors": [
+                    {
+                        "name": "Siddharth Verma",
+                        "website": "https://twitter.com/sidv314",
+                        "affiliation": "UC Berkeley"
+                    },
+                    {
+                        "name": "Justin Fu",
+                        "website": "https://www.linkedin.com/in/justin-fu-117a6aa0/",
+                        "affiliation": "UC Berkeley",
+                    },
+                    {
+                        "name": "Mengjiao Yang",
+                        "website": "https://sherryy.github.io/",
+                        "affiliation": "UC Berkeley",
+                    },
+                    {
+                        "name": "Sergey Levine",
+                        "website": "https://people.eecs.berkeley.edu/~svlevine/",
+                        "affiliation": "UC Berkeley",
+                    },
+                ]
+            }
+        }
+    }
+    Vue.createApp(app2).mount("#authors")
+
+  </script>
+</html>
