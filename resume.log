@@ -1,6 +1,6 @@
 open source     > level 1, order 1, name '/nix/store/3ykx141nzk0pwpnsqjyj52wzjwrphvlj-texlive-combined-2022-texmf/tex/context/base/mkiv/cont-yes.mkiv'
 system          > 
-system          > ConTeXt  ver: 2021.03.05 19:11 MKIV  fmt: 2023.4.6  int: english/english
+system          > ConTeXt  ver: 2021.03.05 19:11 MKIV  fmt: 2023.4.7  int: english/english
 system          > 
 system          > 'cont-new.mkiv' loaded
 open source     > level 2, order 2, name '/nix/store/3ykx141nzk0pwpnsqjyj52wzjwrphvlj-texlive-combined-2022-texmf/tex/context/base/mkiv/cont-new.mkiv'
@@ -112,28 +112,28 @@ modules         > stop used modules
 
 mkiv lua stats  > used config file: /nix/store/bfvdvjgb6i828pmy9aylpjvy6qxnv9h6-texlive-combined-2022/share/texmf-var/web2c/texmfcnf.lua
 mkiv lua stats  > used cache path: readable+writable: '/build/luatex-cache/context/32b7ccb3e3749648f1b03cc65a5802a3'
-mkiv lua stats  > resource resolver: loadtime 0.008 seconds, 0 scans with scantime 0.000 seconds, 0 shared scans, 32 found files, scanned paths: <none>
-mkiv lua stats  > stored bytecode data: 454 modules (0.208 sec), 96 tables (0.014 sec), 550 chunks (0.222 sec)
+mkiv lua stats  > resource resolver: loadtime 0.007 seconds, 0 scans with scantime 0.000 seconds, 0 shared scans, 32 found files, scanned paths: <none>
+mkiv lua stats  > stored bytecode data: 454 modules (0.252 sec), 96 tables (0.015 sec), 550 chunks (0.267 sec)
 mkiv lua stats  > traced context: maxstack: 1427, freed: 7, unreachable: 1420
 mkiv lua stats  > cleaned up reserved nodes: 64 nodes, 10 lists of 444
 mkiv lua stats  > node memory usage: 47 attribute, 14 attribute_list, 9 dir, 2 glue, 51 glue_spec, 3 kern, 3 penalty, 2 temp, 2 user_defined
 mkiv lua stats  > node list callback tasks: 8 unique task lists, 8 instances (re)created, 744 calls
-mkiv lua stats  > h-node processing time: 0.010 seconds including kernel
-mkiv lua stats  > driver time: 0.011 seconds 
+mkiv lua stats  > h-node processing time: 0.012 seconds including kernel
+mkiv lua stats  > driver time: 0.012 seconds 
 mkiv lua stats  > used backend: pdf (backend for directly generating pdf output)
 mkiv lua stats  > jobdata time: 0.001 seconds saving, 0.000 seconds loading
 mkiv lua stats  > callbacks: internal: 1407, file: 75, direct: 2, late: 5, function 998, total: 2487 (2487 per page)
-mkiv lua stats  > randomizer: resumed with value 0.83375039417297
+mkiv lua stats  > randomizer: resumed with value 0.028337326366454
 mkiv lua stats  > positions: 2 collected, 2 regular, 0 special
 mkiv lua stats  > result saved in file: resume.pdf, compresslevel 3, objectcompresslevel 1
 mkiv lua stats  > loaded patterns: en::1, load time: 0.000
 mkiv lua stats  > loaded fonts: 4 files: ptf75f.ttf, materialicons-regular.ttf, opensans-italic.ttf, opensans-regular.ttf
-mkiv lua stats  > font engine: otf 3.113, afm 1.513, tfm 1.000, 20 instances, 16 shared in backend, 1 common vectors, 15 common hashes, load time 0.062 seconds 
+mkiv lua stats  > font engine: otf 3.113, afm 1.513, tfm 1.000, 20 instances, 16 shared in backend, 1 common vectors, 15 common hashes, load time 0.061 seconds 
 mkiv lua stats  > body font sizes: defined: 10pt 11pt 12pt 14.4pt 17.3pt 20.7pt 4pt 5pt 6pt 7pt 8pt 9pt, undefined: 36pt 45pt 54pt
-mkiv lua stats  > metapost: 0.002 seconds, loading: 0.015, execution: 0.001, n: 10, average: 0.002, instances: 1, luacalls: 24, memory: 2.598 M
+mkiv lua stats  > metapost: 0.002 seconds, loading: 0.018, execution: 0.002, n: 10, average: 0.002, instances: 1, luacalls: 24, memory: 2.598 M
 mkiv lua stats  > used platform: linux-64, type: unix, binary subtree: bfvdvjgb6i828pmy9aylpjvy6qxnv9h6-texlive-combined-2022
 mkiv lua stats  > used engine: luatex version: 1.15, functionality level: 7509, banner: this is luatex, version 1.15.0 (web2c 2022/nixos.org)
 mkiv lua stats  > used hash slots: 46572 of 65536 + 200000
-mkiv lua stats  > lua properties: engine: lua 5.3, used memory: 88 MB, ctx: 87 MB, max: unknown MB, hash chars: min(64,40), symbol mask: utf (τεχ)
-mkiv lua stats  > runtime: 0.656 seconds, 1 processed pages, 1 shipped pages, 1.524 pages/second
+mkiv lua stats  > lua properties: engine: lua 5.3, used memory: 78 MB, ctx: 77 MB, max: unknown MB, hash chars: min(64,40), symbol mask: utf (τεχ)
+mkiv lua stats  > runtime: 0.729 seconds, 1 processed pages, 1 shipped pages, 1.372 pages/second
 
