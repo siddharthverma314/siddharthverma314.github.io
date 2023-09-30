@@ -563,11 +563,6 @@ video {
   display: table;
 }
 
-.h-fit{
-  height: -moz-fit-content;
-  height: fit-content;
-}
-
 .w-80{
   width: 20rem;
 }
