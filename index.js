@@ -2,7 +2,8 @@ var content;
 
 function update() {
     is = Array.from(document.getElementsByTagName('input')).map(c => c.checked);
-    document.getElementById("content").replaceChildren(...content.filter(e => is[Number.parseInt(e.dataset["content"])]));
+    newContent = content.filter(e => is[Number.parseInt(e.getAttribute("content"))])
+    document.getElementById("content").replaceChildren(...newContent);
 }
 
 function init() {
